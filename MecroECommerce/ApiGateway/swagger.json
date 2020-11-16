@@ -1,0 +1,91 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "Node.js Swagger API Doc",
+      "description": "Node.js Swagger API Doc",
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+      }
+    },
+    
+    "host": "localhost:7000",
+    
+    "basePath": "",
+    
+    "consumes": ["application/json"],
+    
+    "produces": ["application/json"],
+
+    "schemes": ["http"],
+
+    "tags": [ {"name": "product" , "description": "API for Api Gateway in the system"} ],
+    
+    "paths": {
+      "/Product": {     
+        "get": {
+          "tags": [
+            "product"
+          ],
+          "summary": "Get all Products",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/product"
+              }
+            }
+          }
+        }
+      },
+      "/Product/{id}": {
+        "parameters": [
+          {
+            "name": "ProductId",
+            "in": "path",
+            "required": true,
+            "description": "ID of Product that we want to find",
+            "type": "string"
+          }
+        ],
+        "get": {
+          "tags": [
+            "product/:id"
+          ],
+          "summary": "Get Product with given ID",
+          "responses": {
+            "200": {
+              "description": "Product is found",
+              "schema": {
+                "$ref": "#/definitions/product/{id}"
+              }
+            }
+          }
+        }    
+
+      }
+    },
+    "definitions": {
+      "User": {
+        "required": [
+          "email",
+          "_id"
+        ],
+        "properties": {
+          "_id": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          "name": {
+            "type": "string",
+            "uniqueItems": true
+          }
+        }
+      },
+      "Users": {
+        "type": "array",
+        "$ref": "#/definitions/Product"
+      }
+    }
+  }

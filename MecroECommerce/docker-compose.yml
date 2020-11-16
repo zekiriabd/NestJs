@@ -1,0 +1,39 @@
+
+version: '3.4'
+services:
+  mecroecommerce.orders:
+    image: mecroecommerceorders
+    build:
+      context: ./Orders
+      dockerfile: Dockerfile
+    ports:
+      - 7003:7003
+  mecroecommerce.customers:
+    image: mecroecommercecustomers
+    build:
+      context: ./Customers
+      dockerfile: Dockerfile
+    ports:
+      - 7002:7002
+  mecroecommerce.products:
+    image: mecroecommerceproducts
+    build:
+      context: ./Products
+      dockerfile: Dockerfile
+    ports:
+      - 7001:7001
+    links: 
+      - mongo
+  mecroecommerce.apigateway:
+    image: mecroecommerceapigateway
+    build:
+      context: ./ApiGateway
+      dockerfile: Dockerfile
+    ports:
+      - 7000:7000
+
+  mongo:
+    container_name: mongo
+    image: mongo
+    ports:
+      - 27017:27017
